@@ -125,7 +125,7 @@ const timeline = [
 
 export default function About() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isInView = useInView(ref, { once: true, amount: 0.1, margin: "-100px" });
 
   return (
     <section id="about" className="section-padding bg-[#fefdfb]" ref={ref}>
@@ -137,6 +137,8 @@ export default function About() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={stagger}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           <motion.span 
             className="section-badge mb-6"
@@ -231,6 +233,8 @@ export default function About() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={stagger}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           <motion.div 
             className="text-center mb-8"
@@ -369,6 +373,8 @@ export default function About() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={stagger}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           <motion.div 
             className="text-center mb-12"
