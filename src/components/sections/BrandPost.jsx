@@ -23,7 +23,7 @@ const stagger = {
 
 export default function BrandPost() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isInView = useInView(ref, { once: true, amount: 0.1, margin: "-100px" });
 
   return (
     <section id="brand-post" className="section-padding bg-[#fefdfb]" ref={ref}>

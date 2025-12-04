@@ -22,7 +22,7 @@ const stagger = {
 
 export default function ServicesShowcase() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isInView = useInView(ref, { once: true, amount: 0.1, margin: "-100px" });
 
   return (
     <section id="services-showcase" className="section-padding bg-[#fefdfb]" ref={ref}>
@@ -34,6 +34,8 @@ export default function ServicesShowcase() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={stagger}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           <motion.span 
             className="section-badge-accent mb-6"
@@ -61,6 +63,8 @@ export default function ServicesShowcase() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={stagger}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           {/* Left Side - Image */}
           <motion.div 

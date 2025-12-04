@@ -38,7 +38,7 @@ const highlights = [
 
 export default function EventPoster() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isInView = useInView(ref, { once: true, amount: 0.1, margin: "-100px" });
 
   return (
     <section id="events" className="section-padding bg-[#fefdfb]" ref={ref}>
