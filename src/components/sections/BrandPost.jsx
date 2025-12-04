@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { useInView } from 'framer-motion';
 import { Instagram, Heart, MessageCircle, Send, Bookmark } from 'lucide-react';
+import brandPostImg from '../../assets/brandpost.png';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -74,21 +75,12 @@ export default function BrandPost() {
               </div>
 
               {/* Post Image */}
-              <div className="relative aspect-square" style={{ background: 'linear-gradient(135deg, #1e3a5f 0%, #206a9f 40%, #ff914d 100%)' }}>
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                  <div className="w-24 h-24 mx-auto mb-6 bg-white rounded-full flex items-center justify-center shadow-elevated">
-                    <svg viewBox="0 0 100 100" className="w-16 h-16">
-                      <circle cx="50" cy="60" r="20" fill="#ff914d" />
-                      <circle cx="30" cy="40" r="10" fill="#fefdfb" stroke="#206a9f" strokeWidth="2" />
-                      <circle cx="50" cy="30" r="10" fill="#206a9f" />
-                      <circle cx="70" cy="40" r="10" fill="#ff914d" />
-                      <path d="M50 55 C45 50, 40 52, 40 57 C40 62, 50 68, 50 68 C50 68, 60 62, 60 57 C60 52, 55 50, 50 55" fill="#ff914d" />
-                    </svg>
-                  </div>
-                  <h3 className="font-display text-2xl font-bold mb-2 text-white drop-shadow-md">We're Now Open!</h3>
-                  <p className="text-white/90 text-sm mb-6">Premium Care for Your Furry Friends</p>
-                  <span className="px-6 py-2.5 bg-white text-[#ff914d] text-xs font-semibold rounded-full shadow-lg">Book Now</span>
-                </div>
+              <div className="relative aspect-square">
+                <img 
+                  src={brandPostImg} 
+                  alt="We're Now Open! Premium Care for Your Furry Friends" 
+                  className="w-full h-full object-cover"
+                />
               </div>
 
               {/* Post Actions */}

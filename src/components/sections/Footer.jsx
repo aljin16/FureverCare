@@ -1,5 +1,6 @@
 import { Instagram, Facebook, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import logobrand from '../../assets/logobrand.png';
 
 const navLinks = [
   { name: 'Home', href: '#home' },
@@ -16,8 +17,12 @@ export default function Footer() {
         <div className="py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Brand */}
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br from-[#206a9f] to-[#ff914d]">
-              <span className="text-white font-display font-bold text-sm">F</span>
+            <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center">
+              <img 
+                src={logobrand} 
+                alt="FureverCare Logo" 
+                className="w-full h-full object-cover"
+              />
             </div>
             <span className="font-display text-lg font-bold text-[#1e3a5f]">FureverCare</span>
           </div>

@@ -2,8 +2,16 @@ import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { useInView } from 'framer-motion';
 import { Target, Eye, Scissors, Heart, Award, ShoppingBag } from 'lucide-react';
-import Stack from '../reactbits/Stack';
+import Carousel from '../reactbits/Carousel';
 import Folder from '../reactbits/Folder';
+import review1 from '../../assets/review1.svg';
+import review2 from '../../assets/review2.svg';
+import review3 from '../../assets/review3.svg';
+import review4 from '../../assets/review4.svg';
+import renzelle from '../../assets/renzelle.jpg';
+import aljean from '../../assets/aljean.jpg';
+import trixie from '../../assets/trixie.jpg';
+import mark from '../../assets/mark.jpg';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -22,11 +30,31 @@ const stagger = {
   },
 };
 
-const stackImages = [
-  { id: 1, img: "https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?q=80&w=500&auto=format" },
-  { id: 2, img: "https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=500&auto=format" },
-  { id: 3, img: "https://images.unsplash.com/photo-1452626212852-811d58933cae?q=80&w=500&auto=format" },
-  { id: 4, img: "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?q=80&w=500&auto=format" }
+const carouselItems = [
+  {
+    title: 'Professional Grooming',
+    description: 'Expert care for your beloved pets.',
+    id: 1,
+    img: review1
+  },
+  {
+    title: 'Spa Treatments',
+    description: 'Relaxing and rejuvenating spa services.',
+    id: 2,
+    img: review2
+  },
+  {
+    title: 'Show Styling',
+    description: 'Breed-specific styling for competitions.',
+    id: 3,
+    img: review3
+  },
+  {
+    title: 'Pet Boutique',
+    description: 'Premium products for your furry friends.',
+    id: 4,
+    img: review4
+  }
 ];
 
 const teamMembers = [
@@ -35,28 +63,28 @@ const teamMembers = [
     role: "Lead Groomer",
     bio: "10+ years of experience with show dogs and special needs pets",
     specialty: "Show Styling",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format"
+    image: renzelle
   },
   {
     name: "Aljean Sinohin",
     role: "Pet Spa Director",
     bio: "Expert in aromatherapy and therapeutic massage for pets",
     specialty: "Spa Treatments",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400&auto=format"
+    image: aljean
   },
   {
     name: "Trixie Rayo",
     role: "Senior Groomer",
     bio: "Specialized in cat grooming and anxious pet handling",
     specialty: "Cat Specialist",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=400&auto=format"
+    image: trixie
   },
   {
     name: "Mark Lorenz Marigmen",
     role: "Boutique Manager",
     bio: "Curator of premium pet products and nutrition expert",
     specialty: "Pet Nutrition",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format"
+    image: mark
   }
 ];
 
@@ -205,63 +233,94 @@ export default function About() {
           variants={stagger}
         >
           <motion.div 
-            className="text-center mb-6"
+            className="text-center mb-8"
             variants={fadeInUp}
           >
-            <span className="section-badge-accent mb-6">
+            <span className="section-badge-accent mb-3">
               Services
             </span>
-            <h3 className="text-3xl md:text-4xl font-bold text-[#1e3a5f]">What We Offer</h3>
+            <h3 className="text-3xl md:text-4xl font-bold mb-3 text-[#1e3a5f]">What We Offer</h3>
+            <p className="text-slate-500 max-w-3xl mx-auto text-base">
+              Explore our comprehensive range of services designed to keep your pets happy, healthy, and looking their best.
+            </p>
           </motion.div>
 
           <motion.div 
-            className="grid lg:grid-cols-2 gap-12 mb-8 w-full"
+            className="grid lg:grid-cols-2 gap-6 mb-8 max-w-6xl mx-auto"
             variants={stagger}
           >
-            {/* Stack Gallery */}
+            {/* Carousel Gallery */}
             <motion.div 
-              className="flex flex-col items-center justify-start"
+              whileHover={{ y: -4 }}
+              className="group relative bg-gradient-to-br from-white via-slate-50 to-white rounded-2xl overflow-hidden border border-slate-200/50 shadow-lg hover:shadow-2xl transition-all duration-500"
               variants={fadeInUp}
             >
-              <div style={{ width: '100%', maxWidth: '600px', height: '600px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Stack
-                  randomRotation={true}
-                  sensitivity={180}
-                  sendToBackOnClick={false}
-                  cardDimensions={{ width: 600, height: 600 }}
-                  cardsData={stackImages}
-                />
+              {/* Decorative gradient accent */}
+              <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-[#206a9f]/5 to-[#ff914d]/5 rounded-full blur-3xl -z-10" />
+              
+              <div className="p-6">
+                <div className="mb-4">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-1 h-6 bg-gradient-to-b from-[#206a9f] to-[#ff914d] rounded-full" />
+                    <h4 className="text-xl font-bold text-[#1e3a5f]">Service Gallery</h4>
+                  </div>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    Explore our premium grooming, spa, styling, and boutique services. Each experience is crafted with care.
+                  </p>
+                </div>
+                <div style={{ height: '480px', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Carousel
+                    items={carouselItems}
+                    baseWidth={420}
+                    autoplay={true}
+                    autoplayDelay={3000}
+                    pauseOnHover={true}
+                    loop={true}
+                    round={false}
+                  />
+                </div>
               </div>
-              <p className="text-sm text-slate-400 mt-6 italic">swipe it</p>
             </motion.div>
 
             {/* Folder Component */}
             <motion.div 
-              className="flex flex-col items-center justify-start"
+              whileHover={{ y: -4 }}
+              className="group relative bg-gradient-to-br from-white via-slate-50 to-white rounded-2xl overflow-hidden border border-slate-200/50 shadow-lg hover:shadow-2xl transition-all duration-500"
               variants={fadeInUp}
             >
-              <div style={{ width: '100%', maxWidth: '600px', height: '600px', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingTop: '80px' }}>
-                <Folder 
-                  size={3.6} 
-                  color="#206a9f" 
-                  className="custom-folder"
-                />
+              {/* Decorative gradient accent */}
+              <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-[#ff914d]/5 to-[#206a9f]/5 rounded-full blur-3xl -z-10" />
+              
+              <div className="p-6">
+                <div className="mb-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-1 h-6 bg-gradient-to-b from-[#ff914d] to-[#206a9f] rounded-full" />
+                    <h4 className="text-xl font-bold text-[#1e3a5f]">Service Packages</h4>
+                  </div>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    Discover curated packages for every pet. Click to explore Basic, Premium, and Deluxe options.
+                  </p>
+                </div>
+                <div style={{ width: '100%', height: '420px', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                  <Folder 
+                    size={3.2} 
+                    color="#206a9f" 
+                    className="custom-folder"
+                  />
+                </div>
               </div>
-              <p className="text-sm text-slate-500 text-center max-w-xs mt-2">
-                Click the folder to explore our service offerings and pet care packages
-              </p>
             </motion.div>
           </motion.div>
 
           <motion.div 
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto"
             variants={stagger}
           >
             {services.map((service, index) => (
               <motion.div
                 key={service.title}
-                whileHover={{ y: -8 }}
-                className="group relative h-[400px] rounded-[2rem] overflow-hidden cursor-default bg-[#1e3a5f]"
+                whileHover={{ y: -6 }}
+                className="group relative h-[340px] rounded-2xl overflow-hidden cursor-default bg-white border border-slate-200/60 shadow-md hover:shadow-xl transition-all duration-500"
                 variants={fadeInUp}
               >
                 {/* Background Image */}
@@ -269,29 +328,33 @@ export default function About() {
                   <motion.img 
                     src={service.image} 
                     alt={service.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1e3a5f]/90 via-[#1e3a5f]/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/50 to-slate-900/20 opacity-75 group-hover:opacity-85 transition-opacity duration-300" />
                 </div>
 
                 {/* Content */}
-                <div className="relative h-full p-8 flex flex-col justify-end items-start text-left">
+                <div className="relative h-full p-5 flex flex-col justify-end items-start text-left">
                   <div 
-                    className="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center mb-4 group-hover:bg-white/20 transition-colors duration-300"
+                    className={`w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-all duration-300 ${
+                      index % 2 === 0 
+                        ? 'bg-[#206a9f]/20 text-[#206a9f] group-hover:bg-[#206a9f]/30' 
+                        : 'bg-[#ff914d]/20 text-[#ff914d] group-hover:bg-[#ff914d]/30'
+                    }`}
                   >
-                    <service.icon className="w-6 h-6 text-white" />
+                    <service.icon className="w-5 h-5" />
                   </div>
                   
-                  <h4 className="text-2xl font-bold text-white mb-3 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                  <h4 className="text-lg font-bold text-white mb-2 transform group-hover:translate-y-0 transition-transform duration-300">
                     {service.title}
                   </h4>
                   
-                  <p className="text-white/80 text-sm leading-relaxed line-clamp-2 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-75">
+                  <p className="text-white/90 text-xs leading-relaxed line-clamp-2">
                     {service.description}
                   </p>
 
-                  {/* Decor line */}
-                  <div className={`h-1 rounded-full mt-6 w-0 group-hover:w-12 transition-all duration-500 delay-100 ${
+                  {/* Accent line */}
+                  <div className={`h-0.5 rounded-full mt-3 w-8 transition-all duration-500 ${
                     index % 2 === 0 ? 'bg-[#206a9f]' : 'bg-[#ff914d]'
                   }`} />
                 </div>

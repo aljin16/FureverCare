@@ -1,4 +1,5 @@
 import PillNav from './reactbits/PillNav';
+import logoBrandImg from '../assets/logobrand.png';
 
 const navItems = [
   { label: 'Home', href: '#home' },
@@ -9,18 +10,21 @@ const navItems = [
 ];
 
 export default function Navbar() {
-  // Create a simple SVG logo
-  const logoSvg = `data:image/svg+xml,${encodeURIComponent(`
-    <svg width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-      <rect width="36" height="36" rx="8" fill="#206a9f"/>
-      <text x="18" y="24" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">F</text>
-    </svg>
-  `)}`;
-
   return (
     <div className="flex justify-center">
+      {/* Brand Logo & Text - Top Left */}
+      <a 
+        href="#home" 
+        className="absolute top-5 left-8 z-50 hidden md:flex items-center gap-3 transition-transform hover:scale-105 no-underline"
+      >
+        <img src={logoBrandImg} alt="FureverCare" className="w-12 h-12 object-contain" />
+        <span className="font-display font-bold text-xl tracking-wide text-[#206a9f]">
+          FUREVER CARE
+        </span>
+      </a>
+
       <PillNav
-        logo={logoSvg}
+        logo={logoBrandImg}
         logoAlt="FureverCare Logo"
         items={navItems}
         activeHref="#home"

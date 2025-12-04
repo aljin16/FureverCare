@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import './Folder.css';
+import package1 from '../../assets/package1.svg';
+import package2 from '../../assets/package2.svg';
+import package3 from '../../assets/package3.svg';
 
 const darkenColor = (hex, percent) => {
   let color = hex.startsWith('#') ? hex.slice(1) : hex;
@@ -93,12 +96,49 @@ const Folder = ({ color = '#5227FF', size = 1, items = [], className = '' }) => 
                   : {}
               }
             >
+              {i === 0 && (
+                <img 
+                  src={package1} 
+                  alt="package1" 
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    borderRadius: '10px'
+                  }}
+                />
+              )}
+              {i === 1 && (
+                <img 
+                  src={package2} 
+                  alt="package2" 
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    borderRadius: '10px'
+                  }}
+                />
+              )}
+              {i === 2 && (
+                <img 
+                  src={package3} 
+                  alt="package3" 
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    borderRadius: '10px'
+                  }}
+                />
+              )}
               {item}
             </div>
           ))}
           <div className="folder__front"></div>
           <div className="folder__front right"></div>
         </div>
+        <div className="folder__click-text">click me</div>
       </div>
     </div>
   );

@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { Palette, Type } from 'lucide-react';
+import logoBrandImg from '../../assets/logobrand.png';
+import logoBrandDraw from '../../assets/logobrand-draw.jpg';
 
 const colorPalette = [
   { name: 'Azure Blue', hex: '#206a9f', description: 'Primary' },
@@ -39,22 +41,14 @@ export default function LogoDesign() {
               className="card-elevated p-12 flex flex-col items-center justify-center min-h-[360px] cursor-default"
             >
               <motion.div 
-                className="w-32 h-32 mb-8"
+                className="w-48 h-48 mb-8"
                 whileHover={{ scale: 1.05 }}
               >
-                <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-lg">
-                  <defs>
-                    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#206a9f" />
-                      <stop offset="100%" stopColor="#ff914d" />
-                    </linearGradient>
-                  </defs>
-                  <circle cx="50" cy="60" r="20" fill="url(#logoGradient)" />
-                  <circle cx="30" cy="40" r="10" fill="#fefdfb" stroke="#206a9f" strokeWidth="2" />
-                  <circle cx="50" cy="30" r="10" fill="#206a9f" />
-                  <circle cx="70" cy="40" r="10" fill="#ff914d" />
-                  <path d="M50 55 C45 50, 40 52, 40 57 C40 62, 50 68, 50 68 C50 68, 60 62, 60 57 C60 52, 55 50, 50 55" fill="#ff914d" />
-                </svg>
+                <img 
+                  src={logoBrandImg} 
+                  alt="FureverCare Logo" 
+                  className="w-full h-full object-contain drop-shadow-lg"
+                />
               </motion.div>
               <h3 className="font-display text-3xl font-bold mb-2 text-[#1e3a5f]">FureverCare</h3>
               <p className="text-slate-400 text-xs uppercase tracking-[0.2em]">Premium Pet Grooming</p>
@@ -70,19 +64,17 @@ export default function LogoDesign() {
               }}
             >
               <motion.div 
-                className="w-24 h-24 mb-8"
+                className="w-44 h-44 mb-8"
                 whileHover={{ scale: 1.05 }}
               >
-                <svg viewBox="0 0 100 100" className="w-full h-full">
-                  <circle cx="50" cy="60" r="20" fill="#ff914d" />
-                  <circle cx="30" cy="40" r="10" fill="#fefdfb" />
-                  <circle cx="50" cy="30" r="10" fill="#fefdfb" />
-                  <circle cx="70" cy="40" r="10" fill="#ff914d" />
-                  <path d="M50 55 C45 50, 40 52, 40 57 C40 62, 50 68, 50 68 C50 68, 60 62, 60 57 C60 52, 55 50, 50 55" fill="#fefdfb" />
-                </svg>
+                <img 
+                  src={logoBrandDraw} 
+                  alt="FureverCare Logo Drawing" 
+                  className="w-full h-full object-contain drop-shadow-lg"
+                />
               </motion.div>
               <span className="font-display text-2xl font-bold text-white mb-2">FureverCare</span>
-              <p className="text-white/50 text-xs uppercase tracking-[0.2em]">Dark Mode</p>
+              <p className="text-white/50 text-xs uppercase tracking-[0.2em]">Sketch/Drawing Process</p>
             </motion.div>
           </div>
         </div>
