@@ -5,10 +5,12 @@ import LogoDesign from './components/sections/LogoDesign';
 import BrandPost from './components/sections/BrandPost';
 import EventPoster from './components/sections/EventPoster';
 import Footer from './components/sections/Footer';
+import FloatingPawPrints from './components/ui/FloatingPawPrints';
 
 function App() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-[#fefdfb]">
+      <FloatingPawPrints />
       <Navbar />
       <main>
         <Hero />

@@ -1,36 +1,43 @@
 import { motion } from 'framer-motion';
-import { Heart } from 'lucide-react';
+import { Heart, ArrowRight } from 'lucide-react';
 import fureverBg from '../../assets/fureverbg.svg';
 import { FireworksBackground } from '../ui/FireworksBackground';
 
-const containerVariants = {
+// Ultra-smooth easing
+const smoothEase = [0.22, 1, 0.36, 1];
+const fastSpring = { type: 'spring', stiffness: 400, damping: 30 };
+
+const container = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
-    },
-  },
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 }
+  }
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
+const slideUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { 
+    opacity: 1, 
     y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.25, 0.46, 0.45, 0.94],
-    },
-  },
+    transition: { duration: 0.5, ease: smoothEase }
+  }
+};
+
+const fadeScale = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: { 
+    opacity: 1, 
+    scale: 1,
+    transition: { duration: 0.4, ease: smoothEase }
+  }
 };
 
 export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#8CE4FF]" 
+      className="relative min-h-screen flex items-center overflow-hidden"
       style={{
         backgroundImage: `url(${fureverBg})`,
         backgroundSize: 'cover',
@@ -38,66 +45,142 @@ export default function Hero() {
         backgroundRepeat: 'no-repeat'
       }}
     >
-      {/* Content */}
       <FireworksBackground
-        color={['#FFFFFF', '#FEEE91', '#FFA239', '#FF5656']}
+        color={['#ffffff', '#fffdf5', '#ff914d', '#206a9f']}
         population={1}
         className="absolute inset-0 z-0"
       />
-      <div className="relative z-10 h-full flex items-center w-full">
-        <div
-          className="max-w-7xl mx-auto px-6 lg:px-8 w-full"
-        >
-          <div className="grid lg:grid-cols-2 gap-12 items-center h-full pb-20">
-            {/* Text Content - Left Side */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-left pt-20 lg:pt-0 relative z-20"
+      
+      <div className="relative z-10 w-full">
+        <div className="section-container">
+          <div className="grid lg:grid-cols-2 gap-12 items-center min-h-screen py-24">
+            {/* Text Content */}
+            <motion.div
+              variants={container}
+              initial="hidden"
+              animate="visible"
+              className="max-w-xl"
             >
-              
-              {/* Main Headline */}
-              <h1
-                className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 mb-6 leading-[1.1]"
+              {/* Badge */}
+              <motion.div variants={fadeScale} className="mb-6">
+                <motion.span 
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full text-sm font-medium shadow-sm"
+                  style={{ color: '#ff914d' }}
+                  whileHover={{ scale: 1.05 }}
+                  transition={fastSpring}
+                >
+                  <motion.span
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <Heart size={14} className="fill-current" />
+                  </motion.span>
+                  Premium Pet Care
+                </motion.span>
+              </motion.div>
+
+              {/* Headline */}
+              <motion.h1
+                variants={slideUp}
+                className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.05] tracking-tight"
+                style={{ color: '#206a9f' }}
               >
-                Where Every Pet
+                <motion.span 
+                  className="inline-block"
+                  whileHover={{ scale: 1.02 }}
+                  transition={fastSpring}
+                >
+                  Where Every Pet
+                </motion.span>
                 <br />
-                <span className="text-white drop-shadow-md">
+                <motion.span 
+                  className="inline-block"
+                  whileHover={{ scale: 1.02 }}
+                  transition={fastSpring}
+                >
                   Feels Like Family
-                </span>
-              </h1>
+                </motion.span>
+              </motion.h1>
 
               {/* Description */}
-              <p
-                className="font-body text-lg md:text-xl text-slate-800 mb-10 leading-relaxed max-w-lg font-medium"
+              <motion.p
+                variants={slideUp}
+                className="text-lg text-slate-600 mb-8 leading-relaxed max-w-md"
               >
-                Experience the finest in pet grooming, salon services, and premium products.
-                Your furry friends deserve nothing but the best care, comfort, and style.
-              </p>
+                Experience premium grooming, spa treatments, and boutique products. 
+                Your furry friends deserve exceptional care.
+              </motion.p>
 
-              {/* Call-to-Action Buttons */}
-              <div
-                className="flex flex-wrap items-start gap-4"
-              >
+              {/* CTA Buttons */}
+              <motion.div variants={slideUp} className="flex flex-wrap gap-4">
                 <motion.a
                   href="#services"
-                  className="px-8 py-4 bg-slate-900 text-white rounded-full font-semibold text-lg shadow-lg hover:shadow-xl hover:bg-slate-800 transition-all flex items-center justify-center gap-2"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="inline-flex items-center gap-2 px-7 py-3.5 text-white rounded-full font-semibold text-sm shadow-lg"
+                  style={{ backgroundColor: '#ff914d' }}
+                  whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(255, 145, 77, 0.3)' }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={fastSpring}
                 >
-                  <Heart size={20} className="text-red-400 fill-red-400" />
                   Explore Services
+                  <motion.span
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <ArrowRight size={16} />
+                  </motion.span>
                 </motion.a>
                 <motion.a
                   href="#about"
-                  className="px-8 py-4 bg-white/90 backdrop-blur-sm text-slate-900 rounded-full font-semibold text-lg shadow-md hover:bg-white transition-all"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-white/90 backdrop-blur-sm rounded-full font-semibold text-sm shadow-md"
+                  style={{ color: '#206a9f' }}
+                  whileHover={{ scale: 1.05, backgroundColor: '#ffffff' }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={fastSpring}
                 >
                   Learn More
                 </motion.a>
-              </div>
+              </motion.div>
+
+              {/* Trust indicators */}
+              <motion.div
+                variants={slideUp}
+                className="mt-12 pt-8 border-t border-slate-200/50"
+              >
+                <div className="flex items-center gap-8 text-sm text-slate-600">
+                  <motion.div 
+                    className="flex items-center gap-2"
+                    whileHover={{ scale: 1.05 }}
+                    transition={fastSpring}
+                  >
+                    <motion.span 
+                      className="font-bold text-lg" 
+                      style={{ color: '#206a9f' }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.8 }}
+                    >
+                      5000+
+                    </motion.span>
+                    <span>Happy Pets</span>
+                  </motion.div>
+                  <motion.div 
+                    className="flex items-center gap-2"
+                    whileHover={{ scale: 1.05 }}
+                    transition={fastSpring}
+                  >
+                    <motion.span 
+                      className="font-bold text-lg" 
+                      style={{ color: '#206a9f' }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.9 }}
+                    >
+                      8+
+                    </motion.span>
+                    <span>Years Experience</span>
+                  </motion.div>
+                </div>
+              </motion.div>
             </motion.div>
 
             {/* Right Side - Spacer */}
@@ -105,7 +188,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
     </section>
   );
 }

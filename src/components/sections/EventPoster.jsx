@@ -1,42 +1,51 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Calendar, MapPin, Clock, Gift, Palette, Type, Sparkles } from 'lucide-react';
+import { Calendar, MapPin, Clock, Sparkles } from 'lucide-react';
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
+// Refined animation configs
+const ease = [0.25, 0.1, 0.25, 1];
+const smoothSpring = { type: 'spring', stiffness: 120, damping: 20 };
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
   visible: { 
     opacity: 1, 
     y: 0,
-    transition: {
-      duration: 0.7,
-      ease: [0.25, 0.46, 0.45, 0.94],
-    }
+    transition: { duration: 0.6, ease }
   },
 };
 
-const staggerContainer = {
+const fadeIn = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.5, ease }
+  },
+};
+
+const stagger = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { 
-      staggerChildren: 0.1,
-      delayChildren: 0.1,
-    },
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
   },
 };
 
-const posterColors = [
-  { name: 'Sky Blue', hex: '#8CE4FF' },
-  { name: 'Sunshine', hex: '#FEEE91' },
-  { name: 'Tangerine', hex: '#FFA239' },
-  { name: 'Coral', hex: '#FF5656' },
+const eventDetails = [
+  { icon: Calendar, label: 'Date', value: 'March 15, 2024' },
+  { icon: Clock, label: 'Time', value: '10:00 AM - 6:00 PM' },
+  { icon: MapPin, label: 'Location', value: '123 Pet Street, Pawville' },
 ];
 
-const posterTypography = [
-  { font: 'Playfair Display', weight: 'Bold 700', usage: 'Event Title' },
-  { font: 'Poppins', weight: 'Semibold 600', usage: 'Subheadings' },
-  { font: 'Poppins', weight: 'Regular 400', usage: 'Details' },
+const highlights = [
+  'Free pet health checkups',
+  'Live grooming demonstrations',
+  '20% off all services',
+  'Pet photo booth',
+  'Giveaways & prizes',
+  'Meet & greet with experts',
 ];
 
 export default function EventPoster() {
@@ -44,190 +53,180 @@ export default function EventPoster() {
   const isInView = useInView(ref, { once: true, amount: 0.15 });
 
   return (
-    <section id="events" className="py-32 bg-slate-50" ref={ref}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="events" className="section-padding bg-[#fefdfb]" ref={ref}>
+      <div className="section-container">
+        
         {/* Section Header */}
         <motion.div
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={staggerContainer}
-          className="text-center mb-24"
+          variants={stagger}
+          className="text-center mb-20"
         >
-          <motion.span
-            variants={fadeInUp}
-            className="inline-block px-4 py-1.5 bg-yellow-100 text-yellow-700 rounded-full text-sm font-medium mb-6 tracking-wide"
-          >
-            Special Events
+          <motion.span variants={fadeIn} className="section-badge mb-6">
+            Events
           </motion.span>
-          <motion.h2
-            variants={fadeInUp}
-            className="font-display text-4xl md:text-5xl font-bold text-slate-900 mb-6"
-          >
-            Promotional Event Poster
+          <motion.h2 variants={fadeIn} className="text-4xl md:text-5xl font-bold mb-6 text-[#1e3a5f]">
+            Grand Opening Event
           </motion.h2>
-          <motion.p
-            variants={fadeInUp}
-            className="font-body text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed"
-          >
-            Our grand opening celebration event poster design.
+          <motion.p variants={fadeIn} className="text-slate-500 max-w-xl mx-auto text-lg">
+            Join us for a day of celebration, special offers, and fun activities for you and your pets.
           </motion.p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Event Poster */}
           <motion.div
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
-            variants={staggerContainer}
+            variants={fadeUp}
           >
-            <motion.div
-              variants={fadeInUp}
-              whileHover={{ scale: 1.02, rotateY: 5 }}
-              className="relative bg-gradient-to-br from-orange-400 via-red-400 to-sky-400 rounded-[2rem] shadow-2xl shadow-orange-200 overflow-hidden max-w-lg mx-auto"
-              style={{ perspective: '1000px' }}
+            <motion.div 
+              className="relative rounded-3xl overflow-hidden max-w-md mx-auto"
+              style={{ 
+                background: 'linear-gradient(135deg, #1e3a5f 0%, #206a9f 50%, #ff914d 100%)',
+                boxShadow: '0 16px 48px rgba(30, 58, 95, 0.3), 0 32px 64px rgba(255, 145, 77, 0.15)'
+              }}
+              whileHover={{ y: -8 }}
+              transition={smoothSpring}
             >
               {/* Decorative elements */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-200/30 rounded-full blur-3xl" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-sky-300/40 rounded-full blur-2xl" />
+              <div className="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full blur-3xl" />
+              <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/5 rounded-full blur-2xl" />
 
               {/* Poster Content */}
-              <div className="relative z-10 p-12 text-center flex flex-col items-center h-full">
-                {/* Top badge */}
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={isInView ? { scale: 1, rotate: [0, -5, 5, 0] } : {}}
-                  transition={{ delay: 0.5, duration: 0.5 }}
-                  className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full mb-8 shadow-lg"
-                >
-                  <Sparkles className="w-4 h-4 text-orange-500" />
-                  <span className="font-semibold text-slate-900 text-sm tracking-wide uppercase">Grand Opening</span>
-                </motion.div>
+              <div className="relative z-10 p-12 text-center">
+                {/* Badge */}
+                <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/95 backdrop-blur-sm rounded-full mb-8 shadow-lg">
+                  <Sparkles className="w-4 h-4 text-[#ff914d]" />
+                  <span className="font-semibold text-xs tracking-wider uppercase text-[#1e3a5f]">Grand Opening</span>
+                </div>
 
                 {/* Logo */}
-                <div className="w-24 h-24 mx-auto mb-6 drop-shadow-lg">
-                  <svg viewBox="0 0 100 100" className="w-full h-full">
+                <div className="w-24 h-24 mx-auto mb-6">
+                  <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-xl">
                     <circle cx="50" cy="60" r="20" fill="white" />
-                    <circle cx="30" cy="40" r="10" fill="#FEEE91" />
-                    <circle cx="50" cy="30" r="10" fill="#8CE4FF" />
+                    <circle cx="30" cy="40" r="10" fill="#fefdfb" />
+                    <circle cx="50" cy="30" r="10" fill="#fefdfb" />
                     <circle cx="70" cy="40" r="10" fill="white" />
-                    <path
-                      d="M50 55 C45 50, 40 52, 40 57 C40 62, 50 68, 50 68 C50 68, 60 62, 60 57 C60 52, 55 50, 50 55"
-                      fill="#FF5656"
-                    />
+                    <path d="M50 55 C45 50, 40 52, 40 57 C40 62, 50 68, 50 68 C50 68, 60 62, 60 57 C60 52, 55 50, 50 55" fill="#ff914d" />
                   </svg>
                 </div>
 
                 {/* Event Title */}
-                <h3 className="font-display text-5xl font-bold text-white mb-4 drop-shadow-md leading-tight">
-                  Pawsome
-                  <br />
-                  <span className="text-yellow-200">Party!</span>
+                <h3 className="font-display text-4xl font-bold text-white mb-3 drop-shadow-lg">
+                  Pawsome Party!
                 </h3>
-
-                {/* Tagline */}
-                <p className="font-body text-white/90 text-lg mb-10 font-medium">
+                <p className="text-white/80 text-sm mb-10">
                   Join us for a day of fun, treats & special offers!
                 </p>
 
                 {/* Event Details */}
-                <div className="space-y-4 mb-10 w-full bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-                  <div className="flex items-center justify-center gap-3 text-white">
-                    <Calendar className="w-5 h-5" />
-                    <span className="font-semibold tracking-wide">March 15, 2024</span>
-                  </div>
-                  <div className="flex items-center justify-center gap-3 text-white">
-                    <Clock className="w-5 h-5" />
-                    <span className="font-semibold tracking-wide">10:00 AM - 6:00 PM</span>
-                  </div>
-                  <div className="flex items-center justify-center gap-3 text-white">
-                    <MapPin className="w-5 h-5" />
-                    <span className="font-semibold tracking-wide">123 Pet Street, Pawville</span>
-                  </div>
+                <div className="space-y-4 mb-10">
+                  {eventDetails.map((detail) => (
+                    <div key={detail.label} className="flex items-center justify-center gap-3 text-white/90 text-sm">
+                      <detail.icon className="w-4 h-4" />
+                      <span className="font-medium">{detail.value}</span>
+                    </div>
+                  ))}
                 </div>
 
                 {/* CTA */}
-                <motion.button
+                <motion.button 
+                  className="px-8 py-3.5 bg-white font-bold rounded-full text-sm uppercase tracking-wide text-[#ff914d]" 
+                  style={{ boxShadow: '0 8px 24px rgba(255, 255, 255, 0.25)' }}
                   whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-10 py-4 bg-white text-red-500 font-bold rounded-full shadow-xl hover:shadow-2xl transition-shadow uppercase tracking-wider text-sm mt-auto"
+                  whileTap={{ scale: 0.98 }}
+                  transition={smoothSpring}
                 >
-                  Reserve Your Spot!
+                  Reserve Your Spot
                 </motion.button>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* Poster Specifications */}
+          {/* Event Details */}
           <motion.div
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
-            variants={staggerContainer}
+            variants={stagger}
             className="space-y-8"
           >
-            {/* Color Palette */}
-            <motion.div variants={fadeInUp} className="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-sm">
-              <div className="flex items-center gap-3 mb-8">
-                <Palette className="w-5 h-5 text-orange-500" />
-                <h3 className="font-display text-xl font-bold text-slate-900">Color Scheme</h3>
-              </div>
-              <div className="flex gap-4 justify-between">
-                {posterColors.map((color) => (
-                  <div key={color.name} className="flex-1 text-center group">
-                    <div
-                      className="w-full aspect-square rounded-2xl shadow-sm mb-3 group-hover:scale-105 transition-transform duration-300 border border-slate-100"
-                      style={{ backgroundColor: color.hex }}
-                    />
-                    <p className="font-semibold text-slate-900 text-xs">{color.name}</p>
-                    <p className="text-[10px] text-slate-400 font-mono mt-1 opacity-0 group-hover:opacity-100 transition-opacity">{color.hex}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Typography */}
-            <motion.div variants={fadeInUp} className="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-sm">
-              <div className="flex items-center gap-3 mb-8">
-                <Type className="w-5 h-5 text-sky-500" />
-                <h3 className="font-display text-xl font-bold text-slate-900">Typography</h3>
-              </div>
+            {/* Event Info Card */}
+            <motion.div 
+              variants={fadeUp} 
+              className="card p-8"
+              whileHover={{ y: -4 }}
+              transition={smoothSpring}
+            >
+              <h3 className="text-xl font-bold mb-6 text-[#1e3a5f]">Event Details</h3>
               <div className="space-y-4">
-                {posterTypography.map((item, index) => (
-                  <div key={index} className="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100">
-                    <div>
-                      <p className={`${index === 0 ? 'font-display font-bold text-lg' : 'font-body'} text-slate-900`}>
-                        {item.font}
-                      </p>
-                      <p className="text-xs text-slate-500 mt-1">{item.usage}</p>
+                {eventDetails.map((detail) => (
+                  <motion.div 
+                    key={detail.label} 
+                    className="flex items-center gap-4 p-4 bg-slate-50/80 rounded-2xl"
+                    whileHover={{ x: 4 }}
+                    transition={smoothSpring}
+                  >
+                    <div className="w-12 h-12 icon-container-accent rounded-2xl">
+                      <detail.icon className="w-5 h-5 text-[#ff914d]" />
                     </div>
-                    <span className="px-3 py-1 bg-white border border-slate-200 rounded-full text-xs font-medium text-slate-600">
-                      {item.weight}
-                    </span>
-                  </div>
+                    <div>
+                      <p className="text-xs text-slate-400 uppercase tracking-wider font-medium">{detail.label}</p>
+                      <p className="font-semibold text-[#1e3a5f]">{detail.value}</p>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
 
-            {/* Design Notes */}
-            <motion.div variants={fadeInUp} className="bg-gradient-to-br from-sky-50 to-orange-50 rounded-[2rem] p-8 border border-white shadow-sm">
-              <h3 className="font-display text-xl font-bold text-slate-900 mb-6">Design Highlights</h3>
-              <ul className="space-y-4 font-body text-slate-700 text-sm">
-                <li className="flex items-start gap-3">
-                  <span className="w-2 h-2 bg-orange-400 rounded-full mt-2 shrink-0" />
-                  <span>Gradient background creates visual energy and excitement</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-2 h-2 bg-sky-400 rounded-full mt-2 shrink-0" />
-                  <span>Centered layout ensures easy readability</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-2 h-2 bg-yellow-400 rounded-full mt-2 shrink-0" />
-                  <span>Paw print motifs reinforce brand identity</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-2 h-2 bg-red-400 rounded-full mt-2 shrink-0" />
-                  <span>Clear hierarchy guides viewer attention</span>
-                </li>
-              </ul>
+            {/* Highlights Card */}
+            <motion.div 
+              variants={fadeUp} 
+              className="card p-8"
+              whileHover={{ y: -4 }}
+              transition={smoothSpring}
+            >
+              <h3 className="text-xl font-bold mb-6 text-[#1e3a5f]">Event Highlights</h3>
+              <div className="grid grid-cols-2 gap-4">
+                {highlights.map((highlight, index) => (
+                  <motion.div 
+                    key={index} 
+                    className="flex items-center gap-3 text-sm text-slate-600"
+                    whileHover={{ x: 3 }}
+                    transition={smoothSpring}
+                  >
+                    <span className="w-2 h-2 rounded-full bg-[#ff914d] shrink-0" />
+                    {highlight}
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* CTA Card */}
+            <motion.div 
+              variants={fadeUp} 
+              className="rounded-3xl p-8 text-white"
+              style={{ 
+                background: 'linear-gradient(135deg, #ff914d 0%, #f5803d 100%)',
+                boxShadow: '0 8px 32px rgba(255, 145, 77, 0.3)'
+              }}
+              whileHover={{ y: -4 }}
+              transition={smoothSpring}
+            >
+              <h3 className="text-xl font-bold mb-3">Don't Miss Out!</h3>
+              <p className="text-white/80 text-sm mb-6 leading-relaxed">
+                Limited spots available. Reserve your place today and get exclusive early-bird perks.
+              </p>
+              <motion.button 
+                className="px-7 py-3 bg-white font-semibold rounded-full text-sm text-[#1e3a5f]" 
+                style={{ boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)' }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                transition={smoothSpring}
+              >
+                Register Now
+              </motion.button>
             </motion.div>
           </motion.div>
         </div>
