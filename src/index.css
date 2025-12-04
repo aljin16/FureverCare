@@ -70,7 +70,7 @@
   }
 
   .section-padding {
-    @apply py-24 md:py-32;
+    @apply py-8 md:py-12;
   }
 
   /* Modern Card Styles */

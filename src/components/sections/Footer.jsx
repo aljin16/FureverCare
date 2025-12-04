@@ -1,86 +1,82 @@
-import { Heart, Instagram, Facebook, Mail, Phone, MapPin } from 'lucide-react';
+import { Instagram, Facebook, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const quickLinks = ['Home', 'About', 'Services', 'Events', 'Contact'];
-const socialLinks = [
-  { icon: Instagram, href: '#' },
-  { icon: Facebook, href: '#' },
+const navLinks = [
+  { name: 'Home', href: '#home' },
+  { name: 'About', href: '#about' },
+  { name: 'Services', href: '#services' },
+  { name: 'Events', href: '#events' },
 ];
 
 export default function Footer() {
   return (
-    <footer id="contact" className="text-white" style={{ backgroundColor: '#1e3a5f' }}>
-      <div className="max-w-6xl mx-auto px-6 lg:px-8 py-20">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+    <footer id="contact" className="border-t border-slate-200/60 bg-[#fefdfb]">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        {/* Main Footer Row */}
+        <div className="py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Brand */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-11 h-11 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#ff914d] to-[#f5803d]">
-                <span className="text-white font-display font-bold text-lg">F</span>
-              </div>
-              <span className="font-display text-2xl font-bold text-white">FureverCare</span>
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br from-[#206a9f] to-[#ff914d]">
+              <span className="text-white font-display font-bold text-sm">F</span>
             </div>
-            <p className="text-white/60 text-sm leading-relaxed mb-8 max-w-sm">
-              Premium pet grooming, salon services, and boutique products. 
-              Where every pet is treated like family.
-            </p>
-            <div className="flex gap-3">
-              {socialLinks.map((social, index) => (
-                <motion.a
-                  key={index}
-                  href={social.href}
-                  className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-[#ff914d] transition-all duration-300"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <social.icon className="w-4 h-4" />
-                </motion.a>
-              ))}
-            </div>
+            <span className="font-display text-lg font-bold text-[#1e3a5f]">FureverCare</span>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-semibold text-xs uppercase tracking-[0.15em] mb-6 text-white/50">Quick Links</h4>
-            <ul className="space-y-3.5">
-              {quickLinks.map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-white/70 hover:text-white transition-colors text-sm hover:translate-x-1 inline-block duration-200">
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Nav Links */}
+          <nav className="flex items-center gap-6">
+            {navLinks.map((link) => (
+              <motion.a
+                key={link.name}
+                href={link.href}
+                className="text-slate-500 hover:text-[#ff914d] text-sm font-medium transition-colors"
+                whileHover={{ y: -1 }}
+              >
+                {link.name}
+              </motion.a>
+            ))}
+          </nav>
 
-          {/* Contact */}
-          <div>
-            <h4 className="font-semibold text-xs uppercase tracking-[0.15em] mb-6 text-white/50">Contact</h4>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-white/70 text-sm">
-                <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-[#ff914d]" />
-                <span>123 Pet Street, Pawville</span>
-              </li>
-              <li className="flex items-center gap-3 text-white/70 text-sm">
-                <Phone className="w-4 h-4 shrink-0 text-[#ff914d]" />
-                <span>(555) 123-4567</span>
-              </li>
-              <li className="flex items-center gap-3 text-white/70 text-sm">
-                <Mail className="w-4 h-4 shrink-0 text-[#ff914d]" />
-                <span>hello@furevercare.com</span>
-              </li>
-            </ul>
+          {/* Social + CTA */}
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <motion.a
+                href="#"
+                className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#ff914d] hover:text-white transition-all"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Instagram className="w-3.5 h-3.5" />
+              </motion.a>
+              <motion.a
+                href="#"
+                className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#ff914d] hover:text-white transition-all"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Facebook className="w-3.5 h-3.5" />
+              </motion.a>
+            </div>
+            <motion.a
+              href="#services"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#ff914d] text-white text-xs font-semibold rounded-full hover:bg-[#1e3a5f] transition-colors"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Book Now
+              <ArrowUpRight className="w-3 h-3" />
+            </motion.a>
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-white/40 text-sm">
-            © 2024 FureverCare. All rights reserved.
-          </p>
-          <p className="text-white/40 text-sm flex items-center gap-1.5">
-            Made with <Heart className="w-3.5 h-3.5 fill-current text-[#ff914d]" /> for pets everywhere
-          </p>
+        {/* Bottom Bar */}
+        <div className="py-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
+          <span>© 2024 FureverCare. All rights reserved.</span>
+          <div className="flex items-center gap-4">
+            <a href="#" className="hover:text-slate-600 transition-colors">Privacy</a>
+            <a href="#" className="hover:text-slate-600 transition-colors">Terms</a>
+            <span className="text-slate-300">·</span>
+            <span>hello@furevercare.com</span>
+          </div>
         </div>
       </div>
     </footer>

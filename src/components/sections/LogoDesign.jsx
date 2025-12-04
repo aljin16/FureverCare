@@ -1,46 +1,5 @@
 import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
 import { Palette, Type } from 'lucide-react';
-
-// Refined animation configs
-const ease = [0.25, 0.1, 0.25, 1];
-const smoothSpring = { type: 'spring', stiffness: 120, damping: 20 };
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.6, ease }
-  },
-};
-
-const fadeIn = {
-  hidden: { opacity: 0, y: 12 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.5, ease }
-  },
-};
-
-const stagger = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
-  },
-};
-
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.95 },
-  visible: { 
-    opacity: 1, 
-    scale: 1,
-    transition: { duration: 0.5, ease }
-  },
-};
 
 const colorPalette = [
   { name: 'Azure Blue', hex: '#206a9f', description: 'Primary' },
@@ -54,50 +13,34 @@ const typography = [
 ];
 
 export default function LogoDesign() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.15 });
-
   return (
-    <section id="logo" className="section-padding bg-[#fefdfb]" ref={ref}>
+    <section id="logo" className="section-padding bg-[#fefdfb]">
       <div className="section-container">
         
         {/* Section Header */}
-        <motion.div
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={stagger}
-          className="text-center mb-20"
-        >
-          <motion.span variants={fadeIn} className="section-badge-accent mb-6">
+        <div className="text-center mb-6">
+          <span className="section-badge-accent mb-6">
             Brand Identity
-          </motion.span>
-          <motion.h2 variants={fadeIn} className="text-4xl md:text-5xl font-bold mb-6 text-[#1e3a5f]">
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#1e3a5f]">
             Logo Design
-          </motion.h2>
-          <motion.p variants={fadeIn} className="text-slate-500 max-w-xl mx-auto text-lg">
+          </h2>
+          <p className="text-slate-500 max-w-xl mx-auto text-lg">
             The visual identity that captures our commitment to exceptional pet care.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         {/* Logo Showcase */}
-        <motion.div
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={stagger}
-          className="mb-20"
-        >
+        <div className="mb-8">
           <div className="grid md:grid-cols-2 gap-8">
             {/* Main Logo - Light */}
             <motion.div
-              variants={fadeUp}
               whileHover={{ y: -6 }}
-              transition={smoothSpring}
               className="card-elevated p-12 flex flex-col items-center justify-center min-h-[360px] cursor-default"
             >
               <motion.div 
                 className="w-32 h-32 mb-8"
                 whileHover={{ scale: 1.05 }}
-                transition={smoothSpring}
               >
                 <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-lg">
                   <defs>
@@ -119,9 +62,7 @@ export default function LogoDesign() {
 
             {/* Main Logo - Dark */}
             <motion.div
-              variants={fadeUp}
               whileHover={{ y: -6 }}
-              transition={smoothSpring}
               className="rounded-3xl p-12 flex flex-col items-center justify-center min-h-[360px] cursor-default"
               style={{ 
                 backgroundColor: '#1e3a5f',
@@ -131,7 +72,6 @@ export default function LogoDesign() {
               <motion.div 
                 className="w-24 h-24 mb-8"
                 whileHover={{ scale: 1.05 }}
-                transition={smoothSpring}
               >
                 <svg viewBox="0 0 100 100" className="w-full h-full">
                   <circle cx="50" cy="60" r="20" fill="#ff914d" />
@@ -145,17 +85,12 @@ export default function LogoDesign() {
               <p className="text-white/50 text-xs uppercase tracking-[0.2em]">Dark Mode</p>
             </motion.div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Color Palette & Typography */}
         <div className="grid md:grid-cols-2 gap-8">
           {/* Color Palette */}
-          <motion.div
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-            variants={stagger}
-            className="card p-8"
-          >
+          <div className="card p-8">
             <div className="flex items-center gap-4 mb-8">
               <div className="w-12 h-12 icon-container-accent rounded-2xl">
                 <Palette className="w-6 h-6 text-[#ff914d]" />
@@ -166,7 +101,6 @@ export default function LogoDesign() {
               {colorPalette.map((color) => (
                 <motion.div 
                   key={color.name} 
-                  variants={scaleIn} 
                   className="text-center"
                 >
                   <motion.div
@@ -178,22 +112,16 @@ export default function LogoDesign() {
                         : `0 8px 24px ${color.hex}40`
                     }}
                     whileHover={{ scale: 1.05, y: -4 }}
-                    transition={smoothSpring}
                   />
                   <p className="text-sm font-medium text-slate-700">{color.name}</p>
                   <p className="text-xs text-slate-400 font-mono mt-0.5">{color.hex}</p>
                 </motion.div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* Typography */}
-          <motion.div
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-            variants={stagger}
-            className="card p-8"
-          >
+          <div className="card p-8">
             <div className="flex items-center gap-4 mb-8">
               <div className="w-12 h-12 icon-container rounded-2xl">
                 <Type className="w-6 h-6 text-[#206a9f]" />
@@ -204,7 +132,6 @@ export default function LogoDesign() {
               {typography.map((font) => (
                 <motion.div
                   key={font.name}
-                  variants={fadeIn}
                   className="p-5 bg-slate-50/80 rounded-2xl"
                 >
                   <div className="flex items-center justify-between mb-3">
@@ -215,7 +142,7 @@ export default function LogoDesign() {
                 </motion.div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
