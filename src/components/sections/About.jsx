@@ -1,6 +1,4 @@
 import { motion } from 'framer-motion';
-import { useRef } from 'react';
-import { useInView } from 'framer-motion';
 import { Target, Eye, Scissors, Heart, Award, ShoppingBag } from 'lucide-react';
 import Carousel from '../reactbits/Carousel';
 import Folder from '../reactbits/Folder';
@@ -115,29 +113,17 @@ const services = [
   },
 ];
 
-const timeline = [
-  { year: '2016', event: 'Founded with a single grooming station' },
-  { year: '2018', event: 'Expanded to full-service salon' },
-  { year: '2020', event: 'Launched pet boutique' },
-  { year: '2022', event: 'Opened second location' },
-  { year: '2024', event: '5000+ happy pets served' },
-];
-
 export default function About() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1, margin: "-100px" });
-
   return (
-    <section id="about" className="section-padding bg-[#fefdfb]" ref={ref}>
+    <section id="about" className="section-padding bg-[#fefdfb]">
       <div className="section-container">
         
         {/* Section Header */}
         <motion.div 
           className="text-center mb-6"
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          whileInView="visible"
           variants={stagger}
-          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
         >
           <motion.span 
@@ -165,8 +151,9 @@ export default function About() {
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10 max-w-6xl mx-auto"
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          whileInView="visible"
           variants={stagger}
+          viewport={{ once: true, amount: 0.1 }}
         >
           {/* Brand Story Card */}
           <motion.div 
@@ -231,9 +218,8 @@ export default function About() {
         <motion.div 
           id="services"
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          whileInView="visible"
           variants={stagger}
-          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
         >
           <motion.div 
@@ -371,9 +357,8 @@ export default function About() {
         <motion.div 
           className="mt-16"
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          whileInView="visible"
           variants={stagger}
-          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
         >
           <motion.div 
